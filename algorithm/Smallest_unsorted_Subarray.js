@@ -1,4 +1,4 @@
-const input = [2, 6,6,4,3,2,1,56,7,23411, 4, 8, 10, 9, 15]
+const input = [2,3,4,5,6,7,8]
 
 const Brute_force = input => {
     var length = input.length;
@@ -35,4 +35,26 @@ const Brute_force = input => {
         }
     }
 }
+const Better_Brute_Force = input => {
+    var length = input.length
+    var result = []
+    for (var a = 0; a < length - 1; a++) {
+        for (var b = a + 1; b < length; b++) {
+            if (input[a] >= input[b]) {
+                //a,b are unsorted
+                result.push(a);
+                result.push(b);
+            }
+        }
+    }
+    var max = Math.max(...result);
+    var min = Math.min(...result);
+    if (result.length === 0) {
+        console.log("Array is sorted")
+    } else {
+        console.log(`Length of smallest unsorted array is ${max - min + 1}`)
+    }
+}
+
 console.log(Brute_force(input))
+console.log(Better_Brute_Force(input))
