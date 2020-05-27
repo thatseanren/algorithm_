@@ -1,4 +1,4 @@
-const input = [2,3,4,5,6,7,8]
+
 
 const Brute_force = input => {
     var length = input.length;
@@ -55,6 +55,29 @@ const Better_Brute_Force = input => {
         console.log(`Length of smallest unsorted array is ${max - min + 1}`)
     }
 }
-
+const input = [1, 5, 6, 2, 7, 8, 9];
+const Using_stack = input => {
+    var stack = [];
+    var index = [];
+    for (var a = 0; a < input.length; a++) {
+        if (stack[stack.length - 1] == undefined || input[a] >= stack[stack.length - 1]) {
+            stack.push(input[a]);
+        } else {
+            var _record = a - 1; //record is the correct place for current node
+            while (input[a] < stack[_record]) {
+                _record--
+            }
+            // stack.splice(_record + 1, 0, input[a])
+            index.push(a, _record + 1);
+            //correct postion of element[a] should be at _record + 1 position, 
+            //since _record is the position in where the first smaller element sits, next element is _record + 1
+        }
+    }
+    //Maximum index is in which the farest unsorted element locates
+    //Minimum index is to which the farest unsorted element should be moved
+    //Max - Min + 1 is the traveling distance of such element 
+    console.log(`stack ${stack} record ${_record}\ndistance ${Math.max(...index) - Math.min(...index) + 1} index ${index}`)
+}
 console.log(Brute_force(input))
 console.log(Better_Brute_Force(input))
+Using_stack(input)
